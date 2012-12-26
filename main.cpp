@@ -18,6 +18,7 @@ const difficulty& get_difficulty() {
 		if (level != 0 && level <= sizeof(levels)/sizeof(levels[0])) {
 			has_difficulty = true;
 			std::cout << "Level " << level;
+			--level; //bring level to count from 0
 			std::cout << "\n- Rows:   " << levels[level].numrows;
 			std::cout << "\n- Cols:   " << levels[level].numcols;
 			std::cout << "\n- Colors: " << levels[level].numcolors << "\n\n";
