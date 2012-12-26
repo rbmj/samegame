@@ -70,6 +70,9 @@ public:
 	const T* operator->() const {
 		return ptr;
 	}
+	operator bool() const {
+		return (bool)ptr;
+	}
 };
 
 #endif
