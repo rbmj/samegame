@@ -59,8 +59,21 @@ std::array<unsigned, 2> get_move(unsigned numrows, unsigned numcols) {
 	return std::array<unsigned, 2>{{row, col}};
 }
 
-bool valid_move(Pointer<GameBoard> board) {
-	return true; //TODO
+bool valid_move(Pointer<GameBoard> cur_board) {
+	auto board = GameBoardInstance(cur_board);
+	unsigned rows = GameBoardHeight(board);
+	unsigned cols = GameBoardWidth(board);
+	for (unsigned row = 0; row < rows; ++row) {
+		for (unsigned col = 0; col < cols; ++col) {
+			if (is_empty(GameBoardAt(board, col, row))) {
+				break;
+			}
+			if (GameBoardMark(board, col, row)) {
+				return true;
+			}
+		}
+	}
+	return false;
 }	
 
 int main() {
@@ -77,5 +90,7 @@ int main() {
 		}
 		GameBoardCollapse(board);
 	}
+	GameBoardPrint(board, std::cout);
+	std::cout << "Game over!\n";
 	return 0;
 }
