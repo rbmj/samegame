@@ -10,12 +10,14 @@
 struct GameBoard;
 
 GameBoard* GameBoardCreate(unsigned, unsigned, unsigned);
+GameBoard* GameBoardCreate(Pointer<GameBoard>);
 void GameBoardDestroy(GameBoard*);
 
 typedef util::deleter<GameBoard>::bind<GameBoardDestroy> GameBoardDeleter;
 typedef std::unique_ptr<GameBoard, GameBoardDeleter> UniqueGameBoard;
 
 UniqueGameBoard GameBoardInstance(unsigned, unsigned, unsigned);
+UniqueGameBoard GameBoardInstance(Pointer<GameBoard>);
 
 unsigned GameBoardWidth(Pointer<GameBoard>);
 unsigned GameBoardHeight(Pointer<GameBoard>);

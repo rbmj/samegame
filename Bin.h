@@ -8,12 +8,14 @@
 struct Bin;
 
 Bin * BinCreate(unsigned);
+Bin * BinCreate(Pointer<Bin>);
 void BinDestroy(Bin*);
 
 typedef util::deleter<Bin>::bind<BinDestroy> BinDeleter;
 typedef std::unique_ptr<Bin, BinDeleter> UniqueBin;
 
 UniqueBin BinInstance(unsigned);
+UniqueBin BinInstance(Pointer<Bin>);
 
 //these functions will accept either a Bin* or a UniqueBin
 void BinCollapse(Pointer<Bin>);

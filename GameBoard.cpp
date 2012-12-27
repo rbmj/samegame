@@ -26,12 +26,27 @@ GameBoard* GameBoardCreate(unsigned numbins, unsigned height, unsigned colors) {
 	return ret;
 }
 
+GameBoard* GameBoardCreate(Pointer<GameBoard> other) {
+	assert (other);
+	GameBoard * ret = new GameBoard;
+	ret->num_colors = other->num_colors;
+	for (auto& bin : other->bins) {
+		ret->bins.push_back(BinInstance(bin));
+	}
+	return ret;
+}
+	
+
 void GameBoardDestroy(GameBoard* gb) {
 	delete gb;
 }
 
 UniqueGameBoard GameBoardInstance(unsigned numbins, unsigned height, unsigned colors) {
 	return UniqueGameBoard(GameBoardCreate(numbins, height, colors));
+}
+
+UniqueGameBoard GameBoardInstance(Pointer<GameBoard> board) {
+	return UniqueGameBoard(GameBoardCreate(board));
 }
 
 unsigned GameBoardWidth(Pointer<GameBoard> gb) {

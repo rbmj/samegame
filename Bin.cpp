@@ -19,12 +19,23 @@ Bin * BinCreate(unsigned height) {
 	return ret;
 }
 
+Bin * BinCreate(Pointer<Bin> other) {
+	assert (other);
+	Bin * ret = new Bin;
+	*ret = *other; //default copy ctor should work
+	return ret;
+}
+
 void BinDestroy(Bin* bin) {
 	delete bin;
 }
 
 UniqueBin BinInstance(unsigned height) {
 	return UniqueBin(BinCreate(height));
+}
+
+UniqueBin BinInstance(Pointer<Bin> other) {
+	return UniqueBin(BinCreate(other));
 }
 
 void BinCollapse(Pointer<Bin> bin) {
